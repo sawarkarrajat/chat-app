@@ -1,14 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const route = require("./routes/routes");
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(bodyParser.json());
+const port = 3000;
+const path = require("path");
+const expressValidator = require("express-validator");
+const publicDirectoryPath = path.join(__dirname, "../client");
+console.log(publicDirectoryPath);
+app.use(express.static(publicDirectoryPath));
 
 //configuring the  database
-const dbConfig = require("../config/database.config.js");
+const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
@@ -16,7 +18,8 @@ mongoose.Promise = global.Promise;
 //Connecting to the database
 mongoose
 	.connect(dbConfig.url, {
-		useNewUrlParser: true
+		useNewUrlParser: true,
+		useUnifiedTopology: true
 	})
 	.then(() => {
 		console.log("Successfully connected to the database");
@@ -29,7 +32,12 @@ mongoose
 app.get("/", (req, res) => {
 	res.json({ message: "Welcome to the Chat App" });
 });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
+// Require Notes routes
+app.use("/", route);
 
-app.listen(3000, () => {
-	console.log("server is listening on port 3000");
+app.listen(port, () => {
+	console.log("server is listening on port " + port);
 });
