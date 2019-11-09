@@ -2,37 +2,48 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 const userSchema = new Schema(
 	{
-		firstName: String,
-		lastName: String,
-		email: String,
-		userName: String,
-		password: String
+		firstName: {
+			type: String,
+			required: true
+		},
+		lastName: {
+			type: String,
+			required: true
+		},
+		email: {
+			type: String,
+			unique: true,
+			required: true
+		},
+		password: {
+			type: String,
+			required: true
+		}
 	},
 	{
 		timestamps: true
 	}
 );
 
-var user = mongoose.model("user ", userSchema);
+var users = mongoose.model("users", userSchema);
+
 class userModel {
 	//Create and Save a new User
-	registerUser(body, callback) {
+	createUser(body, callback) {
 		console.log(" request in model", body);
-		var createUser = new user({
+		var createUserDb = new users({
 			firstName: body.firstName,
 			lastName: body.lastName,
 			email: body.email,
-			userName: body.userName,
 			password: body.password
-		}); 
-		createUser.save((err, res) => {
-			if(err) {
+		});
+		createUserDb.save((err, res) => {
+			if (err) {
 				callback(err);
+			} else {
+				callback(null, res);
 			}
-			else{
-				callback(null,res)
-			}
-		})
+		});
 	}
 }
 

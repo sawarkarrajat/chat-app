@@ -15,10 +15,11 @@ class userController {
 			.isEmpty();
 		req.checkBody("email", "Invalid Email").isEmail();
 		req
-			.checkBody("userName", "username cannot be empty")
+			.checkBody("email", "Email should not be empty")
 			.not()
 			.isEmpty();
 		req.checkBody("password", "Password too short").isLength({ min: 8 });
+
 		var errors = req.validationErrors();
 		if (errors) {
 			response.status = false;
@@ -28,10 +29,10 @@ class userController {
 		} else {
 			console.log("req", req.body);
 			var userBody = req.body;
-			userServiceObj.registerUser(userBody, (err, result) => {
+			userServiceObj.registerUser(userBody, function(err, result){
 				if (err) {
 					response.success = false;
-					response.message = "Email or username Already Exists";
+					response.message = "Email Already Exists";
 					res.status(500).send(response);
 				} else {
 					response.success = true;

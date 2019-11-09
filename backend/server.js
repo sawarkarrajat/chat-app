@@ -3,11 +3,7 @@ const bodyParser = require("body-parser");
 const route = require("./routes/routes");
 const app = express();
 const port = 3000;
-const path = require("path");
 const expressValidator = require("express-validator");
-const publicDirectoryPath = path.join(__dirname, "../client");
-console.log(publicDirectoryPath);
-app.use(express.static(publicDirectoryPath));
 
 //configuring the  database
 const dbConfig = require("./config/database.config.js");
@@ -34,7 +30,25 @@ app.get("/", (req, res) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator());
+// Express Validator Middleware
+app.use(
+	expressValidator({
+		errorFormatter: function(param, msg, value) {
+			var namespace = param.split("."),
+				root = namespace.shift(),
+				formParam = root;
+
+			while (namespace.length) {
+				formParam += "[" + namespace.shift() + "]";
+			}
+			return {
+				param: formParam,
+				msg: msg,
+				value: value
+			};
+		}
+	})
+);
 // Require Notes routes
 app.use("/", route);
 
