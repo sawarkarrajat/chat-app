@@ -13,11 +13,11 @@ class userService {
         callback(err);
       } else {
         if (!result) {
-          userModelObj.createUser(body, (err, result) => {
+          userModelObj.createUser(body, (err, data) => {
             if (err) {
               callback(err);
             } else {
-              callback(null, result);
+              callback(null, data);
             }
           });
         } else {
@@ -40,38 +40,46 @@ class userService {
         } else {
           console.log("value of result", result.password);
           console.log("value of result", body.password);
-          let comparePass = bcrypt.compareSync(body.password, result.password);
-          if (comparePass) {
+          if (bcrypt.compareSync(body.password, result.password)) {
             callback(null, result);
           } else {
-            callback({ message: "password don't match" });
+            callback({ message: "passwords don't match" });
           }
         }
       }
     });
   }
   /**
+   * checking user login status
+   */
+  loggedUser(body, callback) {
+    if (body) {
+      callback(null,body);
+    } else {
+      callback(err);
+    }
+  }
+  /**
    * reset password service method
    */
-  resetPasswordUser(body, callback) {
+  forgotPasswordUser(body, callback) {
     console.log(" request in login service ");
-    let mail = { email: body.email };
-
-    userModelObj.findUser(mail, (err, result) => {
+    userModelObj.findUser(body, (err, result) => {
       if (err) {
         callback(err);
       } else {
         if (!result) {
-          callback({ message: "no data found" });
+          callback({ message: "user doesn't exist please register first" });
         } else {
-          console.log("value of result", result.password);
-          console.log("value of result", body.password);
-          let comparePass = bcrypt.compareSync(body.password, result.password);
-          if (comparePass) {
-            callback(null, result);
-          } else {
-            callback({ message: "password don't match" });
-          }
+          console.log("value of result", result);
+          console.log("value of body", body);
+          userModelObj.verifyUser(body, (error, data) => {
+            if (error) {
+              callback(error);
+            } else {
+              callback(null, data);
+            }
+          });
         }
       }
     });

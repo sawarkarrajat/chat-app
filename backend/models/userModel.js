@@ -1,19 +1,25 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 const utility = require("../util/utility");
+const token = require("../util/tokenGen");
+const nodemailer = require("../util/nodemailer.js");
+
 const userSchema = new Schema(
   {
     firstName: {
-      type: String,
+			type: String,
+			trim:true,
       required: true
     },
     lastName: {
-      type: String,
+			type: String,
+			trim:true,
       required: true
     },
     email: {
       type: String,
-      unique: true,
+			unique: true,
+			trim:true,
       required: true
     },
     password: {
@@ -54,6 +60,21 @@ class userModel {
       if (err) {
         callback(err);
       } else {
+        callback(null, res);
+      }
+    });
+  }
+  //method to verify user for forgot password
+	verifyUser(body, callback) {
+    console.log(" request in verifyUSer model", body);
+    let tokenvalue = token.tokenGenerator(body);
+    let address = "http://localhost:3000/" + tokenvalue;
+    nodemailer.mailer(body, address, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        console.log("data in model in verify res",);
+        
         callback(null, res);
       }
     });

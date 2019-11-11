@@ -18,12 +18,15 @@ class userController {
       .checkBody("lastName", "LastName should not be null")
       .not()
       .isEmpty();
-    req.checkBody("email", "Invalid Email").isEmail();
+    req.checkBody("email", "Invalid Email")
+      .isEmail();
     req
       .checkBody("email", "Email should not be empty")
       .not()
       .isEmpty();
-    req.checkBody("password", "Password too short").isLength({ min: 8 });
+    req
+      .checkBody("password", "Password too short")
+      .isLength({ min: 8 });
 
     var errors = req.validationErrors();
     if (errors) {
@@ -67,8 +70,29 @@ class userController {
       }
     });
   }
+  
   /**
    * forgot password controller method
+   */
+  forgotPassword(req, res, next) {
+    let response = {};
+
+    console.log("req ", req.body);
+    var userBody = req.body;
+    userServiceObj.forgotPasswordUser(userBody, function(err, result) {
+      if (err) {
+        response.status = false;
+        response.message = err.message;
+        res.status(500).send(response);
+      } else {
+        response.status = true;
+        response.message = result.message;
+        res.status(200).send(response);
+      }
+    });
+  }
+  /**
+   * reset password controller method
    */
   resetPassword(req, res, next) {
     let response = {};
@@ -82,11 +106,30 @@ class userController {
         res.status(500).send(response);
       } else {
         response.status = true;
-        response.message = "logged in successfully";
+        response.message = result.message;
         res.status(200).send(response);
       }
     });
   }
+  /**
+   * login status check if user is logged in or not
+   */
+  // loginStatus(req, res, next) {
+  //   let response = {};
+  //   console.log("req ", req.body);
+  //   var userBody = req.body;
+  //   userServiceObj.loggedUser(userBody, function(err, result) {
+  //     if (err) {
+  //       response.status = false;
+  //       response.message = "un-Authorised User";
+  //       res.status(500).send(response);
+  //     } else {
+  //       response.status = true;
+  //       response.message = "Authorised user";
+  //       res.status(200).send(response);
+  //     }
+  //   });
+  // }
 }
 
 module.exports = new userController();
