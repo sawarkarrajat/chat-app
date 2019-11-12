@@ -84,5 +84,27 @@ class userService {
       }
     });
   }
+  resetPasswordUser(body, callback) {
+    console.log(" request in login service ");
+    userModelObj.findUser(body, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        if (!result) {
+          callback({ message: "user doesn't exist please register first" });
+        } else {
+          console.log("value of result", result);
+          console.log("value of body", body);
+          userModelObj.resetPassUser(body, (error, data) => {
+            if (error) {
+              callback(error);
+            } else {
+              callback(null, data);
+            }
+          });
+        }
+      }
+    });
+  }
 }
 module.exports = { userService };

@@ -7,19 +7,19 @@ const nodemailer = require("../util/nodemailer.js");
 const userSchema = new Schema(
   {
     firstName: {
-			type: String,
-			trim:true,
+      type: String,
+      trim: true,
       required: true
     },
     lastName: {
-			type: String,
-			trim:true,
+      type: String,
+      trim: true,
       required: true
     },
     email: {
       type: String,
-			unique: true,
-			trim:true,
+      unique: true,
+      trim: true,
       required: true
     },
     password: {
@@ -65,7 +65,7 @@ class userModel {
     });
   }
   //method to verify user for forgot password
-	verifyUser(body, callback) {
+  verifyUser(body, callback) {
     console.log(" request in verifyUSer model", body);
     let tokenvalue = token.tokenGenerator(body);
     let address = "http://localhost:3000/" + tokenvalue;
@@ -73,8 +73,8 @@ class userModel {
       if (err) {
         callback(err);
       } else {
-        console.log("data in model in verify res",);
-        
+        console.log("data in model in verify res");
+
         callback(null, res);
       }
     });
