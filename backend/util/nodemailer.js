@@ -30,7 +30,7 @@ module.exports = {
         callback(err);
       });
     }
-    console.log("out of if");
+    // console.log("out of if");
     
 	}
 };

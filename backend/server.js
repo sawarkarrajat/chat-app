@@ -12,10 +12,12 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 //Connecting to the database
-mongoose
-	.connect(dbConfig.url, {
+mongoose.connect(dbConfig.url, {
 		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+		useFindAndModify: false,
+		useCreateIndex: true
 	})
 	.then(() => {
 		console.log("Successfully connected to the database");
@@ -24,7 +26,6 @@ mongoose
 		console.log("Could not connect to the database. Exiting now".err);
 		process.exit();
 	});
-mongoose.set("useCreateIndex", true);
 
 app.get("/", (req, res) => {
 	res.json({ message: "Welcome to the Chat App" });
