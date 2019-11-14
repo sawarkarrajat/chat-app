@@ -1,6 +1,7 @@
 // const User = require("../models/register.model.js");
 const service = require("../services/userService.js").userService;
 var userServiceObj = new service();
+var token;
 
 class userController {
 	/**
@@ -52,7 +53,6 @@ class userController {
 	 */
 	login(req, res) {
 		let response = {};
-
 		console.log("req ", req.body);
 		var userBody = req.body;
 		userServiceObj.loginUser(userBody, function(err, result) {
@@ -63,6 +63,8 @@ class userController {
 			} else {
 				response.status = true;
 				response.message = "logged in successfully";
+				console.log("value of token in controller",userServiceObj.returnToken());
+				response.token = userServiceObj.returnToken();
 				res.status(200).send(response);
 			}
 		});
