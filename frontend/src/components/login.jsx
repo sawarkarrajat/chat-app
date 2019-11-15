@@ -27,6 +27,11 @@ export default class login extends React.Component {
     });
   }
 
+  handleForgot = () => {
+    const path = '/forgotPassword';
+    this.props.history.push(path);
+  }
+
   handleEmail = (event) => {
     console.log("value of email in login",event.currentTarget.value);
     
@@ -66,8 +71,9 @@ export default class login extends React.Component {
             />
 					</div>
 
-					<div className="FormField">
-						<Button variant="outlined" color="primary" onClick={this.handleSubmit}>Sign In</Button>
+					<div className="FormFieldreg">
+						<Button variant="contained" color="primary" onClick={this.handleSubmit}>Sign In</Button>
+						<Button variant="outlined" color="secondary" onClick={this.handleForgot}>Forgot Password</Button>
 					</div>
 				</form>
 			</div>

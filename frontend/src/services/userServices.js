@@ -8,3 +8,14 @@ export function loginUser(loginData) {
 export function registerUser(userData) {
   return axios.post(address + '/users/register',userData);
 }
+export function forgotUser(userEmail) {
+  return axios.post(address + '/users/forgotPassword',userEmail);
+}
+export function resetUser(userPass,token) {
+  return axios.post(address + '/users/resetPassword', userPass,
+    {
+      headers: {
+        token: token
+    }
+  });
+}

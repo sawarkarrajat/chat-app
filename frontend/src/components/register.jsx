@@ -29,6 +29,11 @@ export default class register extends React.Component {
     });
   }
 
+  handleLoginButton = () => {
+    const path = '/login';
+    this.props.history.push(path);
+  }
+
   handleFirstName = (event) => {
     console.log("value of firstName in register",event.currentTarget.value);
     
@@ -103,8 +108,8 @@ export default class register extends React.Component {
 					</div>
 
 					<div className="FormFieldreg">
-						<Button variant="outlined" color="primary" onClick={this.handleSubmit}>Register</Button>
-						<Button variant="outlined" color="secondary" m={2} onClick={this.handleRegister}>Login In</Button>
+						<Button variant="contained" color="primary" onClick={this.handleSubmit}>Register</Button>
+						<Button variant="outlined" color="secondary" onClick={this.handleLoginButton}>Login In</Button>
 					</div>
 				</form>
 			</div>

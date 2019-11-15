@@ -44,6 +44,7 @@ class userService {
 				if (!result) {
 					callback({ message: "no data found" });
 				} else {
+					console.log("value of result", result);
 					console.log("value of result id", result._id);
 					console.log("value of body", body.password);
 					console.log("after bcrypt reconversion",bcrypt.compareSync(body.password, result.password));
@@ -91,6 +92,8 @@ class userService {
 						if (error) {
 							callback(error);
 						} else {
+							console.log("data recieved after verify user",data);
+							
 							callback(null, data);
 						}
 					});

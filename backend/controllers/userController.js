@@ -84,6 +84,7 @@ class userController {
 				response.message = err.message;
 				res.status(500).send(response);
 			} else {
+				
 				response.status = true;
 				response.message = "email sent check inbox to reset password";
 				res.status(200).send(response);

@@ -74,7 +74,7 @@ class userModel {
 		console.log("value of data._id", body._id);
 		let tokenvalue = token.tokenGenerator(body);
 		console.log("tokenvalue after token generation", tokenvalue);
-		let address = "localhost:3000/resetPassword/" + tokenvalue;
+		let address = "http://localhost:3001/resetPassword/" + tokenvalue;
 		nodemailer.mailer(body, address, (err, res) => {
 			if (err) {
 				callback(err);
@@ -89,10 +89,10 @@ class userModel {
 	// change user password using reset method from service
 	changePassword(body, id, callback) {
 		console.log("request in change password model method and id is:=>", id);
-		console.log("request in change password model method and body is :>",body.password);
+		console.log("request in change password model method and body.password is :>",body.password);
 		
 		var qpassword = utility.encryptPass(body.password);
-		console.log("password after hashing", qpassword);
+		console.log("password to be hashed"+body.password+"\npassword after hashing", qpassword);
 		users.findByIdAndUpdate(id, { password:qpassword }, (err, data) => {
 			if (err) {
 				console.log("error finding id in changepassword method in model");
