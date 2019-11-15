@@ -10,7 +10,7 @@ const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
-app.use(cors())
+app.use(cors());
 //Connecting to the database
 mongoose.connect(dbConfig.url, {
 		useNewUrlParser: true,
@@ -51,7 +51,7 @@ app.use(
 		}
 	})
 );
-// Require Notes routes
+// Require routes
 app.use("/", route);
 
 app.listen(port, () => {

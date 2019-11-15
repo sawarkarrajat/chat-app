@@ -13,12 +13,9 @@ import "./css/styles.css";
 function App() {
 	return (
 		<div>
-			<div className="titlebar">
-				Chat App
-			</div>
 			<BrowserRouter>
 				<Switch>
-					<Route path="/login" component={login}></Route>
+					<Route path="/" exact component={login}></Route>
 					<Route path="/register" component={register}></Route>
 					<Route path="/forgotPassword" component={forgotPassword}></Route>
 					<Route path="/resetPassword/:token" component={resetPassword}></Route>
