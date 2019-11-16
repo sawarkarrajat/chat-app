@@ -129,5 +129,23 @@ class userService {
 			}
 		});
 	}
+	/**
+	 * getting all users in chatDashboard
+	 */
+	getAll_Users(body, callback) {
+		console.log(" request in getallusers service and has body",body);
+    
+		userModelObj.getAll((err, result) => {
+			if (err) {
+				callback(err);
+			} else {
+				if (!result) {
+					callback({ message: "no data found" });
+				} else {
+					callback(null, result);
+				}
+			}
+		});
+	}
 }
 module.exports = { userService };

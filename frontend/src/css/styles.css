@@ -6,16 +6,19 @@
 
 .titlebar{
   display: block;
-  width: 100%;
+  width: 97.5%;
   background-color:#1e1f24;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
   color: white;
-  margin-right: 0;
+  
   padding-left: 35px;
-  padding-right: 100%;
+  
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 2.5em;
   font-weight: 500;
+  box-shadow: 5px 2px 1px grey;
   position: fixed;
 }
 .App {
@@ -39,19 +42,119 @@
 }
 
 .chatUsersList {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 15px;
   width: 20%;
-  margin-top: 5%;
-  border-right: darkslategray;
-  background-color: rgb(148, 214, 181);
+  margin-top: 6%;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-left:5px;
+  border-right: 6px darkslategray;
+  background-color: rgb(98, 206, 152); /* For browsers that do not support gradients */
+  background-image: linear-gradient(lightgreen,teal);
+  box-shadow: 5px 5px 1px grey;
+}
+.chatUsersList_user{
+  display: block;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  border-bottom: 1px solid #445366;
+  font-size: 1em;
+  color: #ffffff;
+}
+.CUL-AVAILABLE{
+  display: block;
+  text-shadow: 2px 2px 5px grey;
+  border-radius:20px ;
+  padding: 5px;
+  border: 1px solid #445366;
+  font-size: 1em;
+  color: #1e1f24;
 }
 
 .chatArea {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: column;
+  justify-content: space-around;
   width: 80%;
-  margin-top: 5%;
+  margin-top: 5.5%;
+  margin-right: 5px;
   background-color:white;
-  padding: 25px 40px;
+  padding: 8px 0px;
   overflow: auto;
 }
+
+.recepientUser{
+align-self: center;
+display: flex;
+border-radius: 15px;
+height: 10%;
+width: 100%;
+background-color: rgb(98, 206, 152);
+background-image: linear-gradient(to bottom right,lightgreen,teal);
+box-shadow: 5px 2px 1px grey;
+}
+
+.chatScreen{
+display: flex;
+align-self: center;
+margin-top: 2px;
+margin-bottom: 2px;
+border: 2px solid darkslategrey!important;
+border-radius: 15px;
+height: 80%;
+width: 99%;
+background-color: beige;
+box-shadow: 5px 5px 1px grey;
+/* overflow: scroll; */
+}
+
+.inputBox{
+display: flex;
+align-self: center;
+border-radius: 15px;
+height: 10%;
+width: 100%;
+background-color: rgb(185, 223, 219);
+}
+
+.messageButton{
+  margin-left: 74%;
+  margin-right:20px;
+  align-self: center;
+  position: absolute;
+}
+.message{
+  width: 100%;
+  align-self: center;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.message_Input{
+  width: 85%;
+  background-color: transparent;
+  border: none;
+  color: #1e1f24;
+  outline: none;
+  border-bottom: 1px solid #445366;
+  font-size: 0.8em;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  overflow: scroll;
+}
+
+.message_Input::placeholder {
+  color: rgb(43, 43, 43);
+  font-size: 0.8em;
+  font-weight: 280;
+  padding-left: 20px;
+  text-align: left;
+}
+
 .FormCenter{
   margin: 90px;
 }

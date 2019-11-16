@@ -44,6 +44,15 @@ class userModel {
 			}
 		});
 	}
+	getAll(callback) {
+		users.find({}, (err, usersinfo) => {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null,usersinfo);
+			}
+		});
+	}
 	//Create and Save a new User
 	createUser(body, callback) {
 		console.log(" request in model", body);

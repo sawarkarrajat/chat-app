@@ -3,7 +3,7 @@ import { loginUser } from "../services/userServices";
 import "../css/styles.css";
 import Button from "@material-ui/core/Button";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
-
+let path = '/chatDashboard';
 const theme = createMuiTheme({
 	overrides: {
 		MuiButton: {
@@ -34,19 +34,20 @@ export default class login extends React.Component {
 
 		loginUser(loginData)
 			.then(result => {
+				console.log("data in req",result.data);				
 				console.log("login successful", result.data.token);
 				window.localStorage.setItem("token", result.data.token);
-				if (result.data.status == 200) {
-					var path = "/chatDashboard";
+				if (result.data.status) {
 					this.props.history.push(path);
 				} else {
-					var path = "/";
+					path = "/";
 					this.props.history.push(path);
 				}
 			})
 			.catch(err => {
 				console.log("unsuccessful", err);
 			});
+		
 	};
 
 	handleForgot = () => {

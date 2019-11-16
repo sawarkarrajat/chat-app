@@ -4,6 +4,7 @@ import login from "./components/login";
 import register from "./components/register";
 import forgotPassword from "./components/forgotPassword";
 import resetPassword from "./components/resetPassword";
+import chatDashboard from "./components/chatDashboard";
 
 // import Button from "@material-ui/core/Button";
 
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/register" component={register}></Route>
 					<Route path="/forgotPassword" component={forgotPassword}></Route>
 					<Route path="/resetPassword/:token" component={resetPassword}></Route>
+					<Route path="/chatDashboard/" component={chatDashboard}></Route>
 				</Switch>
 			</BrowserRouter>
 		</div>
