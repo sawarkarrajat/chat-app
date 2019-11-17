@@ -3,8 +3,12 @@ var userModelObj = new userModel();
 const utility = require("../util/utility");
 const token = require("../util/tokenGen");
 var bcrypt = require("bcryptjs");
+var tok;
 
 class userService {
+	returnToken() {
+		return tok;
+	}
 	//register service
 	registerUser(body, callback) {
 		console.log(" request in create service ");
@@ -40,10 +44,17 @@ class userService {
 				if (!result) {
 					callback({ message: "no data found" });
 				} else {
-					console.log("value of result", result.password);
-					console.log("value of result", body.password);
-          if (bcrypt.compareSync(body.password, result.password)) {
-            let tokenvalue = token.tokenGenerator(body);
+					console.log("value of result", result);
+					console.log("value of result id", result._id);
+					console.log("value of body", body.password);
+					console.log("after bcrypt reconversion",bcrypt.compareSync(body.password, result.password));
+					
+					if (bcrypt.compareSync(body.password, result.password)) {
+						console.log("value of body in if",body);
+						console.log("value of result in if",result);
+						
+						let tokenvalue = token.tokenGenerator(result);
+						tok = tokenvalue;
             console.log("token generated:  ",tokenvalue);
 						callback(null, result);
 					} else {
@@ -81,6 +92,8 @@ class userService {
 						if (error) {
 							callback(error);
 						} else {
+							console.log("data recieved after verify user",data);
+							
 							callback(null, data);
 						}
 					});
@@ -112,6 +125,24 @@ class userService {
 							callback(null, data);
 						}
 					});
+				}
+			}
+		});
+	}
+	/**
+	 * getting all users in chatDashboard
+	 */
+	getAll_Users(body, callback) {
+		console.log(" request in getallusers service and has body",body);
+    
+		userModelObj.getAll((err, result) => {
+			if (err) {
+				callback(err);
+			} else {
+				if (!result) {
+					callback({ message: "no data found" });
+				} else {
+					callback(null, result);
 				}
 			}
 		});

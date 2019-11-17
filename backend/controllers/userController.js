@@ -1,6 +1,7 @@
 // const User = require("../models/register.model.js");
 const service = require("../services/userService.js").userService;
 var userServiceObj = new service();
+var token;
 
 class userController {
 	/**
@@ -52,7 +53,6 @@ class userController {
 	 */
 	login(req, res) {
 		let response = {};
-
 		console.log("req ", req.body);
 		var userBody = req.body;
 		userServiceObj.loginUser(userBody, function(err, result) {
@@ -63,6 +63,8 @@ class userController {
 			} else {
 				response.status = true;
 				response.message = "logged in successfully";
+				console.log("value of token in controller",userServiceObj.returnToken());
+				response.token = userServiceObj.returnToken();
 				res.status(200).send(response);
 			}
 		});
@@ -82,6 +84,7 @@ class userController {
 				response.message = err.message;
 				res.status(500).send(response);
 			} else {
+				
 				response.status = true;
 				response.message = "email sent check inbox to reset password";
 				res.status(200).send(response);
@@ -119,6 +122,29 @@ class userController {
 				}
 			});
 		}
+	}
+
+	/**
+	 * chatDashboard controller method
+	 */
+	getAllUsers(req, res) {
+		let response = {};
+
+		console.log("req controller getAllUsers has body\n", req.body);
+		var userBody = req.body;
+		userServiceObj.getAll_Users(userBody, function (err, result) {
+			if (err) {
+				response.status = false;
+				response.message = "no users in db";
+				res.status(500).send(response);
+			} else {
+				
+				response.status = true;
+				response.message = "users extracted successfully";
+				response.result = result;
+				res.status(200).send(response);
+			}
+		});
 	}
 	/**
 	 * login status check if user is logged in or not

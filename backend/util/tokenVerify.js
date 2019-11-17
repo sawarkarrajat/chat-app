@@ -11,6 +11,7 @@ module.exports = {
 				console.log("\nvalue of skey", sKey);
 
 				console.log("\nvalue of decoded", decoded);
+				console.log("\n value of req in verify token\n",req.body);			
 
 				req.decoded = decoded;
 				next();

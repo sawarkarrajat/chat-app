@@ -4,13 +4,13 @@ const route = require("./routes/routes");
 const app = express();
 const { port } = require("../backend/config/server.config");
 const expressValidator = require("express-validator");
-
+var cors = require('cors');
 //configuring the  database
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
-
+app.use(cors());
 //Connecting to the database
 mongoose.connect(dbConfig.url, {
 		useNewUrlParser: true,
@@ -51,7 +51,7 @@ app.use(
 		}
 	})
 );
-// Require Notes routes
+// Require routes
 app.use("/", route);
 
 app.listen(port, () => {

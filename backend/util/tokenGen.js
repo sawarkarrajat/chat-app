@@ -1,8 +1,11 @@
 const { sKey } = require("../config/token.config");
 const jwt = require("jsonwebtoken");
+const usersModelcaller = require("../models/userModel");
+
+
 module.exports = {
   tokenGenerator(body) {
-    console.log("\nvalue of ID in token generator",body._id);
+    console.log("\nvalue of body in token generator", body);
     
     let payload = { _id: body._id };
     console.log("\nvalue of payload",payload);
