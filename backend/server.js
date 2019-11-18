@@ -1,13 +1,21 @@
-const express = require("express");
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 const bodyParser = require("body-parser");
 const route = require("./routes/routes");
-const app = express();
 const { port } = require("../backend/config/server.config");
 const expressValidator = require("express-validator");
 var cors = require('cors');
 //configuring the  database
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
 
 mongoose.Promise = global.Promise;
 app.use(cors());
@@ -16,8 +24,7 @@ mongoose.connect(dbConfig.url, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useCreateIndex: true,
-		useFindAndModify: false,
-		useCreateIndex: true
+		useFindAndModify: false
 	})
 	.then(() => {
 		console.log("Successfully connected to the database");

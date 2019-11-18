@@ -24,7 +24,7 @@ export function resetUser(userPass, token) {
 }
 export function getAllUser(req) {
   let token = window.localStorage.getItem("token");
-  console.log("value of token in getallusers userservices",token);
+  // console.log("value of token in getallusers userservices",token);
   
   return axios.get(address + '/users/chatDashboard', 
   {

@@ -4,12 +4,7 @@ import "../css/styles.css";
 import Button from "@material-ui/core/Button";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import { getAllUser } from "../services/userServices";
-import io from "socket.io-client";
-var socket = io.connect('http://localhost');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
+
 const theme = createMuiTheme({
 	overrides: {
 		MuiButton: {
