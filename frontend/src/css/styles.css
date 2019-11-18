@@ -5,21 +5,28 @@
 }
 
 .titlebar{
-  display: block;
+  display: flex;
   width: 97.5%;
   background-color:#1e1f24;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
   color: white;
-  
   padding-left: 35px;
-  
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 2.5em;
   font-weight: 500;
   box-shadow: 5px 2px 1px grey;
   position: fixed;
+  justify-content: space-between;
+}
+.usertitle{
+  display: flex;
+  align-items: center;
+  width: 30%;
+  margin-right: 20px;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 .App {
   height: 100vh;
@@ -73,6 +80,17 @@
   font-size: 1em;
   color: #1e1f24;
 }
+.loggedUser{
+  display: flex;
+  align-self: center;
+  width: fit-content;
+  border-radius:15px ;
+  padding: 2px 10px;
+  border: 1px solid white;
+  font-size: 0.5em;
+  text-transform: uppercase;
+  color: white;
+}
 
 .chatArea {
   display: flex;
@@ -88,14 +106,23 @@
 }
 
 .recepientUser{
-align-self: center;
 display: flex;
+flex-flow: row wrap;
+align-items: center;
 border-radius: 15px;
 height: 10%;
 width: 100%;
 background-color: rgb(98, 206, 152);
-background-image: linear-gradient(to bottom right,lightgreen,teal);
+background-image: linear-gradient(to bottom right,gray,white);
 box-shadow: 5px 2px 1px grey;
+}
+.recepientWelcomeMsg{
+  display: flex;
+  margin-left: 3%;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  font-size: 1em;
+  color: #ffffff;
 }
 
 .chatScreen{

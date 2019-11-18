@@ -65,6 +65,8 @@ class userController {
 				response.message = "logged in successfully";
 				console.log("value of token in controller",userServiceObj.returnToken());
 				response.token = userServiceObj.returnToken();
+				response.senderId = result._id;
+				response.result = result.firstName+" "+result.lastName;
 				res.status(200).send(response);
 			}
 		});
@@ -141,6 +143,27 @@ class userController {
 				
 				response.status = true;
 				response.message = "users extracted successfully";
+				response.result = result;
+				res.status(200).send(response);
+			}
+		});
+	}
+	/**
+	 * chatDashboard controller method
+	 */
+	saveMessages(msg, callback) {
+		let response = {};
+
+		console.log("req controller saveMessages has body\n", msg);
+		userServiceObj.saveConversation(msg, function (err, result) {
+			if (err) {
+				response.status = false;
+				response.message = "couldn't save message to db";
+				res.status(500).send(response);
+			} else {
+				
+				response.status = true;
+				response.message = "message saved successfully";
 				response.result = result;
 				res.status(200).send(response);
 			}

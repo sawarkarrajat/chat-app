@@ -147,5 +147,23 @@ class userService {
 			}
 		});
 	}
+	/**
+	 * saving messages in db
+	 */
+	saveConversation(body, callback) {
+		console.log(" request in saveConversation service and has body",body);
+    
+		userModelObj.saveMsg((err, result) => {
+			if (err) {
+				callback(err);
+			} else {
+				if (!result) {
+					callback({ message: "no data found" });
+				} else {
+					callback(null, result);
+				}
+			}
+		});
+	}
 }
 module.exports = { userService };

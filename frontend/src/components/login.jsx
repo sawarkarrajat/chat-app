@@ -14,6 +14,11 @@ const theme = createMuiTheme({
 			outlinedSecondary: {
 				color: "red",
 				fontSize: "0.8em"
+			},
+			containedSecondary: {
+				color: "#1e1f24",
+				backgroundColor: "#00acc1",
+				fontSize: "0.3em"
 			}
 		}
 	}
@@ -33,11 +38,13 @@ export default class login extends React.Component {
 		loginData.password = this.state.password;
 
 		loginUser(loginData)
-			.then(result => {
-				console.log("data in req",result.data);				
-				console.log("login successful", result.data.token);
-				window.localStorage.setItem("token", result.data.token);
-				if (result.data.status) {
+			.then(response => {
+				console.log("data in req",response.data);				
+				console.log("login successful", response.data.token);
+				window.localStorage.setItem("token", response.data.token);
+				window.localStorage.setItem("loggedUser", response.data.result);
+				window.localStorage.setItem("senderId", response.data.senderId);
+				if (response.data.status) {
 					this.props.history.push(path);
 				} else {
 					path = "/";
@@ -52,6 +59,10 @@ export default class login extends React.Component {
 
 	handleForgot = () => {
 		const path = "/forgotPassword";
+		this.props.history.push(path);
+	};
+	handleRegister = () => {
+		const path = "/register";
 		this.props.history.push(path);
 	};
 
@@ -69,7 +80,13 @@ export default class login extends React.Component {
 	render() {
 		return (
 			<MuiThemeProvider theme={theme}>
-				<div className="titlebar">Chat App</div>
+				<div className="titlebar">Chat App
+				<div className="usertitle">
+						<Button variant="contained" color="secondary" onClick={this.handleRegister}>
+							Register
+						</Button>
+					</div>
+				</div>
 				<div className="App">
 					<div className="AppForm">
 						<div className="FormCenter">

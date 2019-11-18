@@ -32,7 +32,9 @@ const userSchema = new Schema(
 	}
 );
 
+
 var users = mongoose.model("users", userSchema);
+
 
 class userModel {
 	findUser(body, callback) {
@@ -50,6 +52,25 @@ class userModel {
 				callback(err);
 			} else {
 				callback(null,usersinfo);
+			}
+		});
+	}
+	//create and save messages
+	saveMsg(body, callback) {
+		console.log(" request in model save msg", body);
+		var newConversation = new messages({
+			senderId: body.senderId,
+			receiverId:body.receiverId,
+			sender: body.sender,
+			receiver:body.receiver,
+			message: body.message
+		});
+
+		newConversation.save((err, res) => {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
 			}
 		});
 	}

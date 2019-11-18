@@ -1,6 +1,5 @@
 var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const controller = require("./controllers/userController");
 const bodyParser = require("body-parser");
 const route = require("./routes/routes");
 const { port } = require("../backend/config/server.config");
@@ -10,15 +9,9 @@ var cors = require('cors');
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
 
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+app.use(cors());
 
 mongoose.Promise = global.Promise;
-app.use(cors());
 //Connecting to the database
 mongoose.connect(dbConfig.url, {
 		useNewUrlParser: true,
@@ -37,8 +30,10 @@ mongoose.connect(dbConfig.url, {
 app.get("/", (req, res) => {
 	res.json({ message: "Welcome to the Chat App" });
 });
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // Express Validator Middleware
 app.use(
 	expressValidator({
@@ -58,9 +53,25 @@ app.use(
 		}
 	})
 );
+
 // Require routes
 app.use("/", route);
-
-app.listen(port, () => {
+var server=app.listen(port, () => {
 	console.log("server is listening on port " + port);
+});
+//var server = require('http').Server(app);
+var io = require('socket.io')(server);
+io.on('connection', function (socket) {
+	console.log("socket connected succesfuly");
+	
+  socket.on('messaged', function (mdata) {
+		console.log("data in socket", mdata);
+		controller.saveMessages(mdata, (err, result) => {
+			if (err) {
+				console.log("error in socket save",err);
+			} else {
+				console.log("message saved successfully",result);
+			}
+		})		
+  });
 });
