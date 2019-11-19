@@ -1,4 +1,4 @@
-var msgModel = require("../models/messageModel").messageModel;
+var msgModel = require("../models/msgModel").msgModel;
 var msgModelObj = new msgModel();
 
 class msgService {

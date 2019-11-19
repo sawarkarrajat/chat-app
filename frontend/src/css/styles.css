@@ -37,7 +37,19 @@
 .AppAside {
   width: 50%;
   margin-top: 5%;
-  background-color: rgb(248, 231, 206);
+  background-color: #1974d6;
+}
+.AppAsidee {
+  width: 50%;
+  margin-top: 5%;
+  background-color: #f7f9fd;
+}
+
+.image{
+  display: flex;
+  align-self: center;
+  margin: 7%;
+  filter: opacity(80%);
 }
 
 .AppForm {
@@ -61,15 +73,26 @@
   margin-left:5px;
   border-right: 6px darkslategray;
   background-color: rgb(98, 206, 152); /* For browsers that do not support gradients */
-  background-image: linear-gradient(lightgreen,teal);
+  background-image: linear-gradient(#90ddee,white);
   box-shadow: 5px 5px 1px grey;
 }
 .chatUsersList_user{
   display: block;
+  padding: 5px;
   text-shadow: 2px 2px 5px rgb(0, 0, 0);
   border-bottom: 1px solid #445366;
   font-size: 1em;
-  color: #ffffff;
+  color: #1e1f24;
+}
+.chatUsersList_user:hover{
+  display: block;
+  background-color: rgba(0, 255, 255, 0.541);
+  border-radius: 10px;
+  padding: 5px;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  border-bottom: 1px solid #445366;
+  font-size: 1em;
+  color: #1e1f24;
 }
 .CUL-AVAILABLE{
   display: block;
@@ -102,6 +125,11 @@
   margin-right: 5px;
   background-color:white;
   padding: 8px 0px;
+
+  /* background-image: url('');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%; */
   overflow: auto;
 }
 
@@ -112,8 +140,8 @@ align-items: center;
 border-radius: 15px;
 height: 10%;
 width: 100%;
-background-color: rgb(98, 206, 152);
-background-image: linear-gradient(to bottom right,gray,white);
+background-color: #313131;
+/* background-image: linear-gradient(to bottom right,gray,white); */
 box-shadow: 5px 2px 1px grey;
 }
 .recepientWelcomeMsg{
@@ -130,54 +158,53 @@ display: flex;
 align-self: center;
 margin-top: 2px;
 margin-bottom: 2px;
-border: 2px solid darkslategrey!important;
+border: 2px solid #FFFFCC;
 border-radius: 15px;
 height: 80%;
 width: 99%;
-background-color: beige;
+background-image: linear-gradient(#90ddee,white);
 box-shadow: 5px 5px 1px grey;
+
 /* overflow: scroll; */
 }
 
 .inputBox{
 display: flex;
+justify-content: space-between;
 align-self: center;
 border-radius: 15px;
 height: 10%;
 width: 100%;
-background-color: rgb(185, 223, 219);
+background-color: #313131;
 }
 
 .messageButton{
-  margin-left: 74%;
   margin-right:20px;
   align-self: center;
-  position: absolute;
 }
 .message{
-  width: 100%;
+  width: inherit;
   align-self: center;
-  box-shadow: 5px 5px 5px grey;
 }
 
 .message_Input{
   width: 85%;
   background-color: transparent;
   border: none;
-  color: #1e1f24;
+  color: #ffffff;
   outline: none;
-  border-bottom: 1px solid #445366;
-  font-size: 0.8em;
-  font-weight: 300;
+  border-bottom: 1px solid #ffffff;
+  font-size: 1em;
+  font-weight: 500;
   margin-bottom: 10px;
   margin-top: 10px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .message_Input::placeholder {
-  color: rgb(43, 43, 43);
-  font-size: 0.8em;
-  font-weight: 280;
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  font-weight: 400;
   padding-left: 20px;
   text-align: left;
 }

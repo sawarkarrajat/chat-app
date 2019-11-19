@@ -1,4 +1,3 @@
-// const User = require("../models/register.model.js");
 const service = require("../services/msgService.js").msgService;
 var msgServiceObj = new service();
 
@@ -29,11 +28,12 @@ class msgController {
 	/**
 	 * chatDashboard controller method
 	 */
-	saveMessages(msg, callback) {
+	saveMessages(req, res) {
 		let response = {};
 
-		console.log("req controller saveMessages has body\n", msg);
-		msgServiceObj.saveConversation(msg, function (err, result) {
+		console.log("req controller saveMessages has body\n", req.body);
+		var msgbody = req.body;
+		msgServiceObj.saveConversation(msgbody, function (err, result) {
 			if (err) {
 				response.status = false;
 				response.message = "couldn't save message to db";

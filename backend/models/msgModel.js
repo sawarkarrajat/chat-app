@@ -4,30 +4,38 @@ var Schema = mongoose.Schema;
 const msgSchema = new Schema({
   senderId: {
     type: String,
-    trim: true
+		trim: true,
+		// required: true
   },
   receiverId: {
     type: String,
-    trim: true
+		trim: true,
+		// required: true
   },
   sender: {
     type: String,
-    trim: true
+		trim: true,
+		// required: true
   },
   receiver: {
     type: String,
-    trim: true
+		trim: true,
+		// required: true
   },
   message: {
     type: String,
-    trim: true
-  }
+		trim: true,
+		// required: true
+	}
+},
+{
+	timestamps:true	
 }
 );
 
 var messages = mongoose.model("messages", msgSchema);
 
-class messageModel {
+class msgModel {
 	// findUser(body, callback) {
 	// 	users.findOne(body, (err, data) => {
 	// 		if (err) {
@@ -59,12 +67,16 @@ class messageModel {
 
 		newConversation.save((err, res) => {
 			if (err) {
+				console.log("error in saving ===>",err);
+				
 				callback(err);
 			} else {
+				console.log("after saving body contains ",res);
+
 				callback(null, res);
 			}
 		});
   }
 }
 
-module.exports = {  messageModel };
+module.exports = {  msgModel };

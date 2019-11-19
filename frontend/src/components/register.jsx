@@ -147,7 +147,11 @@ export default class register extends React.Component {
 							</form>
 						</div>
 					</div>
-					<div className="AppAside"></div>
+					<div className="AppAside">
+					<div className="image">
+								<img src="https://media.giphy.com/media/TvLuZ00OIADoQ/giphy.gif" alt="well we tried to show something cool" width="600" height="400"/>
+						</div>
+					</div>
 				</div>
 			</MuiThemeProvider>
 		);
